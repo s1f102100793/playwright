@@ -13,4 +13,3 @@ const scrapeStocks = async () => {
 };
 
 scrapeStocks();
-111
