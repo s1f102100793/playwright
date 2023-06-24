@@ -4,10 +4,13 @@ async function fetchStockPrice(): Promise<void> {
   const browser: Browser = await chromium.launch();
   const page: Page = await browser.newPage();
 
-  const url = 'https://finance.yahoo.com/quote/MSFT';
-  await page.goto(url, { waitUntil: 'networkidle' });
+  const url = 'https://finance.yahoo.co.jp/quote/MSFT';
+  await page.goto(url);
 
-  const stockPriceSelector = 'span[data-reactid="32"]';
+  const stockPriceSelector = 'span._3rXWJKZF';
+  // セレクタが現れるまで待つ
+  await page.waitForSelector(stockPriceSelector);
+
   const stockPriceElement: ElementHandle | null = await page.$(stockPriceSelector);
   if (stockPriceElement) {
     const stockPrice: string = await stockPriceElement.innerText();
