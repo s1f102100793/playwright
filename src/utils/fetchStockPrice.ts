@@ -5,9 +5,9 @@ async function fetchStockPrice(): Promise<void> {
   const page: Page = await browser.newPage();
 
   const url = 'https://finance.yahoo.com/quote/MSFT';
-  await page.goto(url);
+  await page.goto(url, { waitUntil: 'networkidle' });
 
-  const stockPriceSelector = 'span[data-reactid="50"]';
+  const stockPriceSelector = 'span[data-reactid="32"]';
   const stockPriceElement: ElementHandle | null = await page.$(stockPriceSelector);
   if (stockPriceElement) {
     const stockPrice: string = await stockPriceElement.innerText();
