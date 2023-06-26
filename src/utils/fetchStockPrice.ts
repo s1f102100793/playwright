@@ -4,7 +4,7 @@ async function fetchStockPrice(): Promise<void> {
   const browser: Browser = await chromium.launch();
   const page: Page = await browser.newPage();
 
-  const url = 'https://finance.yahoo.co.jp/quote/MSFT';
+  const url = 'https://finance.yahoo.co.jp/quote/7203.T';
   await page.goto(url);
 
   const stockPriceSelector = 'span._3rXWJKZF';
@@ -14,7 +14,7 @@ async function fetchStockPrice(): Promise<void> {
   const stockPriceElement: ElementHandle | null = await page.$(stockPriceSelector);
   if (stockPriceElement) {
     const stockPrice: string = await stockPriceElement.innerText();
-    console.log(`Microsoft stock price: $${stockPrice}`);
+    console.log(`TOYOTA stock price: $${stockPrice}`);
   } else {
     console.log('Failed to get stock price element.');
   }
